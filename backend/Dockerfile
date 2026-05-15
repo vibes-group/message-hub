@@ -2,8 +2,8 @@ FROM golang:1.26-bookworm AS build
 
 WORKDIR /src
 
-COPY go.mod ./
-COPY cmd ./cmd
+COPY backend/go.mod ./
+COPY backend/cmd ./cmd
 
 RUN --mount=type=cache,target=/root/.cache/go-build \
     CGO_ENABLED=0 GOOS=linux \
@@ -19,10 +19,10 @@ RUN apt-get update \
 WORKDIR /app
 
 COPY --from=build /out/message-hub-app /app/message-hub-app
-COPY web /app/web
+COPY frontend /app/web
 
 ENV APP_ADDR=:8080
-ENV WEB_DIR=/app/web
+ENV APP_WEB_DIR=/app/web
 
 EXPOSE 8080
 

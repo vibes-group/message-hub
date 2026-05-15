@@ -1,3 +1,11 @@
 .git
+.agents
+.codex
 .github
+.env
+.env.*
 README.md
+tmp
+supabase
+frontend/dist
+frontend/node_modules

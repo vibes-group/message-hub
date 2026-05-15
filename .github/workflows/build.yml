@@ -4,10 +4,8 @@ on:
   push:
     branches: [master]
     paths:
-      - 'cmd/**'
-      - 'web/**'
-      - 'go.mod'
-      - 'Dockerfile'
+      - 'backend/**'
+      - 'frontend/**'
       - '.dockerignore'
       - '.github/workflows/build.yml'
   workflow_dispatch:
@@ -45,7 +43,7 @@ jobs:
       - uses: docker/build-push-action@v7
         with:
           context: .
-          file: Dockerfile
+          file: backend/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

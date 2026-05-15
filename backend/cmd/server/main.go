@@ -21,9 +21,9 @@ type healthResponse struct {
 
 func main() {
 	addr := env("APP_ADDR", ":8080")
-	webDir := env("WEB_DIR", "./web")
+	webDir := env("APP_WEB_DIR", "../frontend")
 	flag.StringVar(&addr, "addr", addr, "HTTP listen address")
-	flag.StringVar(&webDir, "web-dir", webDir, "directory with built web assets")
+	flag.StringVar(&webDir, "web-dir", webDir, "directory with frontend assets")
 	flag.Parse()
 
 	mux := http.NewServeMux()
