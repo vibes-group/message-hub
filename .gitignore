@@ -1,0 +1,7 @@
+.env
+.env.*
+!.env.example
+
+/message-hub-app
+/dist
+/tmp
