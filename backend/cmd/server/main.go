@@ -9,8 +9,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"path/filepath"
-	"strings"
 	"syscall"
 	"time"
 )
@@ -21,14 +19,11 @@ type healthResponse struct {
 
 func main() {
 	addr := env("APP_ADDR", ":8080")
-	webDir := env("APP_WEB_DIR", "../frontend")
 	flag.StringVar(&addr, "addr", addr, "HTTP listen address")
-	flag.StringVar(&webDir, "web-dir", webDir, "directory with frontend assets")
 	flag.Parse()
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /healthz", health())
-	mux.Handle("/", spa(webDir))
 
 	server := &http.Server{
 		Addr:              addr,
@@ -39,7 +34,7 @@ func main() {
 
 	errc := make(chan error, 1)
 	go func() {
-		log.Printf("listening on %s, serving web from %s", addr, webDir)
+		log.Printf("listening on %s", addr)
 		if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			errc <- err
 		}
@@ -70,34 +65,6 @@ func health() http.HandlerFunc {
 			log.Printf("health: encode: %v", err)
 		}
 	}
-}
-
-func spa(webDir string) http.Handler {
-	files := http.FileServer(http.Dir(webDir))
-	index := filepath.Join(webDir, "index.html")
-
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodGet && r.Method != http.MethodHead {
-			http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
-			return
-		}
-
-		cleanPath := filepath.Clean(strings.TrimPrefix(r.URL.Path, "/"))
-		if strings.HasPrefix(cleanPath, "..") {
-			http.NotFound(w, r)
-			return
-		}
-		if cleanPath == "." {
-			cleanPath = "index.html"
-		}
-		target := filepath.Join(webDir, cleanPath)
-		if info, err := os.Stat(target); err == nil && !info.IsDir() {
-			files.ServeHTTP(w, r)
-			return
-		}
-
-		http.ServeFile(w, r, index)
-	})
 }
 
 func accessLog(next http.Handler) http.Handler {

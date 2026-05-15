@@ -2,8 +2,11 @@
 
 Чат с end-to-end шифрованием. Сейчас каркас для будущего продукта.
 
+Доступ проектируется как invite-only: публичной регистрации не будет, приглашать
+смогут пользователи, которые уже имеют доступ.
+
 Структура:
 
-- `backend/` — Go HTTP-сервер (`module message-hub/backend`). На каркасе ещё и отдаёт статический фронт; долгосрочно — push relay и серверные хелперы.
-- `frontend/` — веб-клиент. Пока plain HTML/CSS, переедет на Vite + TS.
-- `supabase/` — конфиг Supabase-проекта, SQL-миграции, Edge Functions.
+- `backend/` — Go HTTP-сервер для trusted API, push relay и серверных хелперов.
+- `frontend/` — Vite + React + TS. Собирается в static artifact и отдаётся Caddy.
+- `supabase/` — конфиг Supabase-проекта и SQL-миграции.

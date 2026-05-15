@@ -1,6 +1,6 @@
 # supabase
 
-Конфиг Supabase-проекта, SQL-миграции и Edge Functions.
+Конфиг Supabase-проекта и SQL-миграции.
 
 Инициализация локально через Supabase CLI:
 
@@ -12,6 +12,5 @@ supabase link --project-ref <ref>
 Структура:
 
 - `migrations/` — нумерованные SQL-миграции (`0001_init.sql`, ...)
-- `functions/<name>/index.ts` — Edge Functions (Deno/TS)
 - `config.toml` — создаётся `supabase init`
 - `seed.sql` — опциональный dev-сид

@@ -14,15 +14,14 @@ FROM debian:12-slim
 RUN apt-get update \
  && apt-get install -y --no-install-recommends ca-certificates wget \
  && rm -rf /var/lib/apt/lists/* \
- && groupadd -r app && useradd -r -g app -u 10001 -d /app -s /sbin/nologin app
+ && groupadd -r app \
+ && useradd -r -g app -u 10001 -d /app -s /sbin/nologin app
 
 WORKDIR /app
 
 COPY --from=build /out/message-hub-app /app/message-hub-app
-COPY frontend /app/web
 
 ENV APP_ADDR=:8080
-ENV APP_WEB_DIR=/app/web
 
 EXPOSE 8080
 

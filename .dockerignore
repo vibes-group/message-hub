@@ -7,5 +7,4 @@
 README.md
 tmp
 supabase
-frontend/dist
-frontend/node_modules
+frontend

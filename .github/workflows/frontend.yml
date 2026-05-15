@@ -1,0 +1,53 @@
+name: Build and deploy frontend
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: frontend-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24.15'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Build
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: message-hub-dist
+          path: frontend/dist
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    needs: build
+    permissions:
+      actions: read
+    uses: vibes-group/infra/.github/workflows/deploy-static.yml@master
+    with:
+      site: message-hub
+      artifact: message-hub-dist
+    secrets:
+      DEPLOY_HOST:     ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_SSH_KEY:  ${{ secrets.DEPLOY_SSH_KEY }}
+      DEPLOY_HOST_KEY: ${{ secrets.DEPLOY_HOST_KEY }}
