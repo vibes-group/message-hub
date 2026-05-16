@@ -78,7 +78,6 @@ jobs:
     uses: vibes-group/infra/.github/workflows/deploy.yml@master
     with:
       app: message-hub
-      image_tag: ${{ needs.build.outputs.image_tag }}
     secrets:
       DEPLOY_HOST:     ${{ secrets.DEPLOY_HOST }}
       DEPLOY_SSH_KEY:  ${{ secrets.DEPLOY_SSH_KEY }}
