@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "provider": "supabase",
+  "name": "Local Demo Instance",
+  "supabaseUrl": "https://example.supabase.co",
+  "supabaseAnonKey": "public-demo-anon-key-for-local-ui-flow-only",
+  "functionsUrl": "https://example.supabase.co/functions/v1",
+  "vapidPublicKey": "public-demo-vapid-key-for-local-ui-flow-only",
+  "supportUrl": "https://example.com"
+}

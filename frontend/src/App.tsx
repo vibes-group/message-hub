@@ -1,7 +1,11 @@
-export function App() {
+import { BrowserRouter } from 'react-router'
+
+import { AppRoutes } from '@/app/router'
+
+export default function App() {
   return (
-    <main className="shell">
-      <h1>message hub</h1>
-    </main>
-  );
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  )
 }

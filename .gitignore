@@ -1,10 +1,12 @@
 .env
 .env.*
 !.env.example
+.DS_Store
 .agents
 .codex
 
 /frontend/dist
 /frontend/node_modules
 /frontend/*.tsbuildinfo
+/supabase/.temp
 /tmp
