@@ -6,7 +6,7 @@ This repository is **public**. Treat every commit as visible.
 
 - Real names, emails, phone numbers, messenger handles
 - Absolute home paths (`/home/<user>/...`, `C:\Users\<name>\...`) — use `~` or relative
-- Real hostnames / IPs of prod, dev, or test VPS — use placeholders (`your-host.example.com`, `<server-ip>`)
+- Real hostnames / IPs of prod, dev, or test servers — use placeholders (`your-host.example.com`, `<server-ip>`)
 - `.env` contents, tokens, keys, passwords, SSH keys — even as "examples"
 - Supabase `service_role` key, JWT secret, FCM server key
 - Per-user secrets (`recovery_key`, `user_master_key`, `room_key`) — never exist server-side; never include in logs, fixtures, or test data
