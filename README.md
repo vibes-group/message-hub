@@ -1,12 +1,7 @@
 # message-hub
 
-Чат с end-to-end шифрованием. Сейчас каркас для будущего продукта.
+Чат с end-to-end шифрованием.
 
-Доступ проектируется как invite-only: публичной регистрации не будет, приглашать
-смогут пользователи, которые уже имеют доступ.
-
-Структура:
-
-- `backend/` — Go HTTP-сервер для trusted API, push relay и серверных хелперов.
-- `frontend/` — Vite + React + TS. Собирается в static artifact и отдаётся Caddy.
-- `supabase/` — конфиг Supabase-проекта и SQL-миграции.
+- `backend/` — Go HTTP-сервер: trusted API, push relay.
+- `frontend/` — Vite + React PWA.
+- `supabase/` — конфиг и SQL-миграции.

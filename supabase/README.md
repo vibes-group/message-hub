@@ -1,16 +1,8 @@
 # supabase
 
-Конфиг Supabase-проекта и SQL-миграции.
-
-Инициализация локально через Supabase CLI:
+Конфиг проекта и SQL-миграции.
 
 ```bash
 supabase init
 supabase link --project-ref <ref>
 ```
-
-Структура:
-
-- `migrations/` — нумерованные SQL-миграции (`0001_init.sql`, ...)
-- `config.toml` — создаётся `supabase init`
-- `seed.sql` — опциональный dev-сид
